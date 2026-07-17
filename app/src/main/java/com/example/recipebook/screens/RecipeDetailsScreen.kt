@@ -4,6 +4,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -26,7 +28,8 @@ fun RecipeDetailsScreen(
     modifier: Modifier = Modifier
 ){
     Column(
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = modifier.verticalScroll(rememberScrollState())
     ){
         RecipeTitleCard(recipe = recipe)
         RecipeDetails(recipe = recipe, onSeeSubstitutions = onSeeSubstitutions)
@@ -121,12 +124,13 @@ fun Ingredients(recipe: Recipe, modifier: Modifier = Modifier) {
             modifier = modifier
                 .height(14.dp)
         )
+
         recipe.ingredients.forEach(
             {Text(
                 text = "🍴 $it",
                 fontSize = 14.sp,
                 modifier = modifier
-                    .padding(start = 14.dp, end = 14.dp)
+                    .padding(start = 14.dp, bottom = 3.dp, end = 14.dp)
             )}
         )
     }
@@ -158,12 +162,15 @@ fun Instructions(recipe: Recipe, modifier: Modifier = Modifier) {
     }
 }
 
-val previewRecipe = recipes.last()
+val previewRecipe = recipes.first()
 
 @Preview(showBackground=true)
 @Composable
 fun RecipeDetailsScreenPreview(){
-    Column(horizontalAlignment = Alignment.CenterHorizontally){
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier.verticalScroll(rememberScrollState())
+    ){
         RecipeTitleCard(recipe = previewRecipe)
         RecipeDetails(recipe = previewRecipe, onSeeSubstitutions = {})
         Button(
