@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -13,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -62,14 +64,79 @@ fun RecipeDetails(recipe: Recipe, modifier: Modifier = Modifier) {
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Row(){
-            Text(
-                text = recipe.ingredients.joinToString(),
-                fontSize = 14.sp
+        Row() {
+            Spacer(
+                modifier = modifier
+                    .height(14.dp)
             )
         }
-        Row(){}
+        Row() {
+            Ingredients(recipe)
+        }
+        Row() {
+            Spacer(
+                modifier = modifier
+                    .height(14.dp)
+            )
+        }
+        Row() {
+            Button(
+                onClick={},
+                modifier = modifier
+            ) {
+                Text("Need to substitute an ingredient?")
+            }
+        }
+        Row() {
+            Spacer(
+                modifier = modifier
+                    .height(14.dp)
+            )
+        }
+        Row() {
+            Instructions(recipe)
+        }
 
+    }
+}
+
+@Composable
+fun Ingredients(recipe: Recipe, modifier: Modifier = Modifier) {
+    Column(){
+        Text(
+            text = "Ingredients",
+            fontSize = 21.sp,
+            modifier = modifier
+                .align(alignment = Alignment.CenterHorizontally)
+        )
+        Spacer(
+            modifier = modifier
+                .height(14.dp)
+        )
+        Text(
+            text = recipe.ingredients.joinToString(),
+            fontSize = 14.sp
+        )
+    }
+}
+
+@Composable
+fun Instructions(recipe: Recipe, modifier: Modifier = Modifier) {
+    Column(){
+        Text(
+            text = "Steps",
+            fontSize = 21.sp,
+            modifier = modifier
+                .align(alignment = Alignment.CenterHorizontally)
+        )
+        Spacer(
+            modifier = modifier
+                .height(14.dp)
+        )
+        Text(
+            text = recipe.steps.joinToString(),
+            fontSize = 14.sp
+        )
     }
 }
 
