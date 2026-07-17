@@ -1,18 +1,26 @@
+package com.example.recipebook
+
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.recipebook.screens.RecipeListScreen
+import recipes
 
 @Composable
-fun App(modifier: Modifier = Modifier) {
+fun App() {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
         startDestination = "main-screen"
     ) {
         composable(route = "main-screen") {
-            // MainScreen goes here
+            RecipeListScreen(
+                recipes = recipes,
+                onRecipeClick = { index ->
+                    navController.navigate("recipe/$index")
+                }
+            )
         }
         composable(route = "recipe/{id}") {
             val id = it.arguments?.getString("id")
@@ -28,9 +36,7 @@ fun App(modifier: Modifier = Modifier) {
                 ) }
             )
         }
-        composable(route= "substitutions") {
-            // SubstitutionScreen goes here
+        composable(route = "substitutions") {
         }
     }
-
 }
