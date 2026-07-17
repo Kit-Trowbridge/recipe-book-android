@@ -23,6 +23,18 @@ fun App() {
             )
         }
         composable(route = "recipe/{id}") {
+            val id = it.arguments?.getString("id")
+            val nonNullId = requireNotNull(id?.toInt()) {"Recipe does not exist"}
+            val recipe = recipes[nonNullId]
+            RecipeDetailsScreen(
+                recipe = recipe,
+                onSeeSubstitutions = { navController.navigate(
+                    "substitutions"
+                )},
+                onReturnToMain = { navController.navigate(
+                    "main-screen"
+                ) }
+            )
         }
         composable(route = "substitutions") {
         }
