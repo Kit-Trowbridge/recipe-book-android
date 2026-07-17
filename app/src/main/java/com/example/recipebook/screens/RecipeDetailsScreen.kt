@@ -121,12 +121,17 @@ fun Ingredients(recipe: Recipe, modifier: Modifier = Modifier) {
             modifier = modifier
                 .height(14.dp)
         )
-        Text(
-            text = recipe.ingredients.joinToString(),
-            fontSize = 14.sp
+        recipe.ingredients.forEach(
+            {Text(
+                text = "🍴 $it",
+                fontSize = 14.sp,
+                modifier = modifier
+                    .padding(start = 14.dp, end = 14.dp)
+            )}
         )
     }
 }
+
 
 @Composable
 fun Instructions(recipe: Recipe, modifier: Modifier = Modifier) {
@@ -141,10 +146,15 @@ fun Instructions(recipe: Recipe, modifier: Modifier = Modifier) {
             modifier = modifier
                 .height(14.dp)
         )
-        Text(
-            text = recipe.steps.joinToString(),
-            fontSize = 14.sp
-        )
+
+        for ((index, step) in recipe.steps.withIndex()) {
+            Text(
+                text= "${index + 1}. $step",
+                fontSize = 14.sp,
+                modifier = modifier
+                    .padding(start = 14.dp, bottom = 7.dp, end = 14.dp)
+            )
+        }
     }
 }
 
