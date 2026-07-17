@@ -21,21 +21,19 @@ import com.example.recipebook.data.Recipe
 @Composable
 fun RecipeDetailsScreen(
     recipe: Recipe,
-    onNextScreen: () -> Unit,
+    returnToMain: () -> Unit,
     modifier: Modifier = Modifier
 ){
-    Column(){
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally
+    ){
         RecipeTitleCard(recipe = recipe)
-//        Spacer(
-//            Modifier.height(28.dp)
-//        )
         RecipeDetails(recipe = recipe)
         Button(
-            onClick = onNextScreen,
+            onClick = returnToMain,
             modifier = modifier
-                .align(alignment = Alignment.End)
         ) {
-            Text("Next recipe")
+            Text("Return to Main")
         }
     }
 }
@@ -153,8 +151,13 @@ val previewRecipe = recipes.last()
 @Preview(showBackground=true)
 @Composable
 fun RecipeDetailsScreenPreview(){
-    Column(){
+    Column(horizontalAlignment = Alignment.CenterHorizontally){
         RecipeTitleCard(recipe = previewRecipe)
         RecipeDetails(recipe = previewRecipe)
+        Button(
+            onClick = { }
+        ) {
+            Text("Return to Main")
+        }
     }
 }

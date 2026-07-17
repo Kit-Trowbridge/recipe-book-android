@@ -20,8 +20,8 @@ fun App(modifier: Modifier = Modifier) {
             val recipe = recipes[nonNullId]
             RecipeDetailsScreen(
                 recipe = recipe,
-                onNextScreen = { navController.navigate(
-                    "recipe/${nonNullId + 1}"
+                returnToMain = { navController.navigate(
+                    "main-screen"
                 ) }
             )
         }
