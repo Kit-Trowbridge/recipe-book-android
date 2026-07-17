@@ -1,5 +1,6 @@
 package com.example.recipebook
 
+import RecipeDetailsScreen
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.compose.NavHost
