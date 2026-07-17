@@ -15,7 +15,10 @@ fun App(modifier: Modifier = Modifier) {
             // MainScreen goes here
         }
         composable(route = "recipe/{id}") {
-
+            val id = it.arguments?.getString("id")
+            val nonNullId = requireNotNull(id?.toInt()) {"Recipe does not exist"}
+            val recipe = recipes[nonNullId]
+            RecipeDetailsScreen(recipe = recipe)
         }
         composable(route= "substitutions") {
             // SubstitutionScreen goes here
