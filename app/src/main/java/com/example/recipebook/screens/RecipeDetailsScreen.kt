@@ -21,16 +21,17 @@ import com.example.recipebook.data.Recipe
 @Composable
 fun RecipeDetailsScreen(
     recipe: Recipe,
-    returnToMain: () -> Unit,
+    onSeeSubstitutions: () -> Unit,
+    onReturnToMain: () -> Unit,
     modifier: Modifier = Modifier
 ){
     Column(
         horizontalAlignment = Alignment.CenterHorizontally
     ){
         RecipeTitleCard(recipe = recipe)
-        RecipeDetails(recipe = recipe)
+        RecipeDetails(recipe = recipe, onSeeSubstitutions = onSeeSubstitutions)
         Button(
-            onClick = returnToMain,
+            onClick = onReturnToMain,
             modifier = modifier
         ) {
             Text("Return to Main")
@@ -67,6 +68,7 @@ fun RecipeTitleCard(recipe: Recipe, modifier: Modifier = Modifier) {
 @Composable
 fun RecipeDetails(
     recipe: Recipe,
+    onSeeSubstitutions: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -86,7 +88,7 @@ fun RecipeDetails(
             )
 
             Button(
-                onClick={},
+                onClick= onSeeSubstitutions,
                 modifier = modifier
             ) {
                 Text("Need to substitute an ingredient?")
@@ -153,7 +155,7 @@ val previewRecipe = recipes.last()
 fun RecipeDetailsScreenPreview(){
     Column(horizontalAlignment = Alignment.CenterHorizontally){
         RecipeTitleCard(recipe = previewRecipe)
-        RecipeDetails(recipe = previewRecipe)
+        RecipeDetails(recipe = previewRecipe, onSeeSubstitutions = {})
         Button(
             onClick = { }
         ) {

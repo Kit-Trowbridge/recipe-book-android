@@ -20,7 +20,10 @@ fun App(modifier: Modifier = Modifier) {
             val recipe = recipes[nonNullId]
             RecipeDetailsScreen(
                 recipe = recipe,
-                returnToMain = { navController.navigate(
+                onSeeSubstitutions = { navController.navigate(
+                    "substitutions"
+                )},
+                onReturnToMain = { navController.navigate(
                     "main-screen"
                 ) }
             )
