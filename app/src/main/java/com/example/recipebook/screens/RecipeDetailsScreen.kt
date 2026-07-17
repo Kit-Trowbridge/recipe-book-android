@@ -45,12 +45,10 @@ fun RecipeDetailsScreen(
         ){
             RecipeTitleCard(recipe = recipe)
             RecipeDetails(recipe = recipe, onSeeSubstitutions = onSeeSubstitutions)
-//            Button(
-//                onClick = onReturnToMain,
-//                modifier = modifier
-//            ) {
-//                Text("Return to Main")
-//            }
+            Spacer(
+                modifier = modifier
+                    .height(63.dp)
+            )
         }
     }
     }
@@ -202,6 +200,7 @@ fun RecipeDetailsScreenPreview(){
             ) {
                 Text("Return to Main")
             }
+
         }
 
     }
