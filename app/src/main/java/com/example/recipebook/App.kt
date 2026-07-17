@@ -18,7 +18,12 @@ fun App(modifier: Modifier = Modifier) {
             val id = it.arguments?.getString("id")
             val nonNullId = requireNotNull(id?.toInt()) {"Recipe does not exist"}
             val recipe = recipes[nonNullId]
-            RecipeDetailsScreen(recipe = recipe)
+            RecipeDetailsScreen(
+                recipe = recipe,
+                onNextScreen = { navController.navigate(
+                    "recipe/${nonNullId + 1}"
+                ) }
+            )
         }
         composable(route= "substitutions") {
             // SubstitutionScreen goes here
