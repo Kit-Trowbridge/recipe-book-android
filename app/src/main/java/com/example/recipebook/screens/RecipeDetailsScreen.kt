@@ -7,6 +7,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
+import androidx.compose.material3.ExtendedFloatingActionButton
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -27,20 +30,29 @@ fun RecipeDetailsScreen(
     onReturnToMain: () -> Unit,
     modifier: Modifier = Modifier
 ){
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier.verticalScroll(rememberScrollState())
-    ){
-        RecipeTitleCard(recipe = recipe)
-        RecipeDetails(recipe = recipe, onSeeSubstitutions = onSeeSubstitutions)
-        Button(
-            onClick = onReturnToMain,
+    Scaffold(
+        floatingActionButton = {
+            ExtendedFloatingActionButton(onClick = onReturnToMain) {
+                Text("View all")
+            }
+        }
+    ) { innerPadding ->
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
             modifier = modifier
-        ) {
-            Text("Return to Main")
+                .verticalScroll(rememberScrollState())
+                .padding(innerPadding)
+        ){
+            RecipeTitleCard(recipe = recipe)
+            RecipeDetails(recipe = recipe, onSeeSubstitutions = onSeeSubstitutions)
+            Spacer(
+                modifier = modifier
+                    .height(63.dp)
+            )
         }
     }
-}
+    }
+
 
 
 @Composable
@@ -167,16 +179,30 @@ val previewRecipe = recipes.first()
 @Preview(showBackground=true)
 @Composable
 fun RecipeDetailsScreenPreview(){
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.verticalScroll(rememberScrollState())
-    ){
-        RecipeTitleCard(recipe = previewRecipe)
-        RecipeDetails(recipe = previewRecipe, onSeeSubstitutions = {})
-        Button(
-            onClick = { }
-        ) {
-            Text("Return to Main")
+    Scaffold(
+        floatingActionButton = {
+            ExtendedFloatingActionButton(onClick = { }) {
+                Text("View all")
+            }
         }
+    ) {
+        innerPadding ->
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier
+                .verticalScroll(rememberScrollState())
+                .padding(innerPadding)
+        ){
+            RecipeTitleCard(recipe = previewRecipe)
+            RecipeDetails(recipe = previewRecipe, onSeeSubstitutions = {})
+            Button(
+                onClick = { }
+            ) {
+                Text("Return to Main")
+            }
+
+        }
+
     }
+
 }
